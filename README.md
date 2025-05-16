@@ -1,79 +1,50 @@
-# My Personal Website & Blog
+# Automated Hugo Deployment to Azure VM: Configuration & Scripts
 
-**Live Site:** [http://4.180.169.137](http://4.180.169.137)
-*(Note: This IP may change. A custom domain and HTTPS are planned future improvements.)*
+This repository contains the configuration files, scripts, and documentation detailing the setup for automatically deploying a [Hugo](https://gohugo.io/) static site to an Nginx web server on an Azure Virtual Machine. It demonstrates a custom CI/CD pipeline built from scratch using server-side Git hooks.
 
-Welcome to the source code repository for my personal website and blog! This site is built using the static site generator [Hugo](https://gohugo.io/) and is a space where I share my journey learning new technologies and various interests.
+This setup powers my personal blog, which can be viewed live at [http://4.180.169.137](http://4.180.169.137) (IP subject to change).
+The source code for the Hugo site itself is located at [https://github.com/[YourGitHubUsername]/my-blog](https://github.com/[YourGitHubUsername]/my-blog) (replace with your actual blog repo name).
 
-Beyond the content itself, this project also serves as a practical learning ground for implementing DevOps principles and building an automated deployment pipeline for a self-managed server.
+## Purpose
 
-## About This Site
+The goal here is to document and share the DevOps practices implemented for this personal project, showcasing:
+*   Server provisioning and initial setup on Azure.
+*   Git-based CI/CD using a `post-receive` hook.
+*   Automated static site building with Hugo.
+*   Nginx configuration for serving the static site.
 
-*   **Content:** Blog posts, articles, and pages written in Markdown.
-*   **Static Site Generator:** Hugo (Currently using the 'hugo-profile' theme, after migrating from 'ananke').
-*   **Deployment:** This site is automatically built and deployed to a self-managed Azure Virtual Machine running Nginx.
+## High-Level Workflow Overview
 
-## DevOps & CI/CD Demonstration
+1.  **Local Development:** Developer writes Hugo site content and pushes changes to a primary Git remote (e.g., GitHub).
+2.  **Deployment Trigger:** To deploy, the developer pushes to a *separate* Git remote (`vps-deploy`) pointing to a bare Git repository on the Azure VM.
+3.  **Server-Side Automation:** This push triggers a `post-receive` hook script within the bare repository on the server.
+4.  **Build & Deploy Process (by hook script):**
+    *   The latest source code is checked out.
+    *   Hugo builds the static site (`public/` directory).
+    *   The live webroot for Nginx is cleared.
+    *   The newly built `public/` directory contents are copied to the Nginx webroot.
+5.  **Site Live:** Nginx serves the updated website.
 
-The operational setup that powers this site – including the CI/CD pipeline, server configuration, Nginx setup, and custom Git hooks – is documented in detail in a separate repository:
+## Repository Structure
 
-👉 **[View Detailed CI/CD Setup & Configuration Files](https://github.com/[YourGitHubUsername]/my-hugo-vps-deploy-setup)** 👈
+This repository is organized as follows:
 
-This "configuration demo" repository includes:
-*   The exact `post-receive` Git hook script used for automation.
-*   The Nginx server block configuration.
-*   Notes on the Azure VM setup and other server-side configurations.
-*   A detailed explanation of the deployment workflow.
+*   **/server_preparation/**: Notes and example commands for setting up the Azure VM.
+    *   `01_azure_vm_provisioning_notes.md`: Key considerations during VM creation in Azure.
+    *   `02_initial_os_configuration.md`: Steps for OS updates, user management, and firewall (NSG).
+    *   `03_software_installation.md`: Commands for installing Git, Nginx, and Hugo.
+*   **/git_deployment_setup/**: Scripts and notes related to the Git-based deployment mechanism.
+    *   `01_vps_bare_git_repo_setup.md`: Setting up the server-side bare Git repository for deployment.
+    *   `02_post-receive_hook.sh`: The core deployment automation script (the `post-receive` hook).
+*   **/nginx_configuration/**: Nginx configuration files.
+    *   `my_blog_nginx.conf`: The Nginx server block configuration for the Hugo site.
 
-This separation helps keep this repository focused on the site's content and the other repository focused on the operational infrastructure.
+## Future Enhancements for This Setup
 
-## Technologies Used (Site Content - This Repo)
+*   Add more functionalities provided by Nginx
+*   Implement HTTPS
+*   Automate server provisioning and configuration using Ansible.
+*   Explore containerizing the application/build process with Docker.
+*   Set up monitoring and more robust logging.
 
-*   **Static Site Generation:** Hugo
-*   **Content Management:** Markdown, Git
-*   **Version Control:** Git & GitHub
-
-*(For technologies related to deployment, server, and CI/CD, please see the [CI/CD Setup & Configuration Repository](https://github.com/[YourGitHubUsername]/my-hugo-vps-deploy-setup).)*
-
-## Local Development
-
-To run or contribute to the content of this site locally:
-
-1.  Clone this repository:
-    ```bash
-    git clone https://github.com/[YourGitHubUsername]/my-blog.git # Adjust repo name if different
-    ```
-2.  Navigate into the project directory:
-    ```bash
-    cd my-blog # Adjust repo name if different
-    ```
-3.  Ensure you have [Hugo (Extended version)](https://gohugo.io/installation/) installed.
-4.  If the theme is managed as a Git submodule (e.g., `hugo-profile`):
-    ```bash
-    git submodule update --init --recursive
-    ```
-5.  Run the local Hugo server:
-    ```bash
-    hugo server -D
-    ```
-    The site will typically be available at `http://localhost:1313`.
-
-## How to Deploy (Overview)
-
-Updates to this site are deployed via a `git push` to a specific remote on my Azure VM. The server then automatically builds and deploys the latest version.
-
-1.  Commit local changes to this repository.
-2.  Push to `origin` (GitHub).
-3.  Push to the `vps-deploy` remote to trigger the live deployment.
-
-## Future Plans
-
-I plan to continue developing both the content of this blog and enhancing its underlying infrastructure:
-
-*   Adding more articles and sharing my learning experiences.
-*   Implementing a custom domain and HTTPS (SSL/TLS).
-*   Further exploring DevOps tools for automation, configuration management (e.g., Ansible), and containerization (e.g., Docker). *(Refer to the [CI/CD Setup & Configuration Repository](https://github.com/[YourGitHubUsername]/my-hugo-vps-deploy-setup) for more specific infrastructure plans.)*
-
----
-
-Thank you for visiting!
+Please browse the respective directories for detailed configurations and scripts.
