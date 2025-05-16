@@ -2,6 +2,8 @@
 #
 # This hook script is triggered on the server after a push.
 # It checks out the code, builds the Hugo site, and deploys it.
+# It should be placed in: ~/my-website.git/hooks/post-receive
+# Remember to make it executable: chmod +x post-receive
 #
 
 # --- Configuration (ADJUST THESE IF YOUR PATHS ARE DIFFERENT) ---
