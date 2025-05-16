@@ -1,6 +1,6 @@
 # Initial OS Configuration on Azure VM
 
-After the Azure VM is provisioned and you can connect via SSH (`ssh -i /your_file's_actual_location/private_key.pem yourusername@YOUR_VM_PUBLIC_IP`).
+After the Azure VM is provisioned and you can connect via SSH (`ssh -i /your_file's_actual_location/key_pair.pem yourusername@YOUR_VM_PUBLIC_IP`).
 
 ## 1. System Updates
 
