@@ -30,4 +30,4 @@ These are general notes and considerations taken when provisioning the Azure Vir
     *   **Crucial Initial Inbound Port Rule:** Ensure **SSH (port 22, TCP)** is allowed (preferably from your specific IP for security, or "Any" if your IP changes often).
     *   Other ports (HTTP/80, HTTPS/443) will be opened via NSG rules later.
 
-*Remember to download and securely store your private SSH key if Azure generates a new key pair for you.*
+*Remember to download and securely store your private SSH key, most likely Azure will generate a new key pair file for you.*
