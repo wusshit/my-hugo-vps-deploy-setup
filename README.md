@@ -23,7 +23,7 @@ The goal here is to document and share the DevOps practices implemented for this
     *   Hugo builds the static site (`public/` directory).
     *   The live webroot for Nginx is cleared.
     *   The newly built `public/` directory contents are copied to the Nginx webroot.
-5.  **Site Live:** Nginx serves the updated website.
+5.  **Site Live:** Nginx serves the updated website, accessible via the Azure DNS name.
 
 ## Repository Structure
 
