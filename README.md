@@ -2,7 +2,7 @@
 
 This repository contains the configuration files, scripts, and documentation detailing the setup for automatically deploying a [Hugo](https://gohugo.io/) static site to an Nginx web server on an Azure Virtual Machine. It demonstrates a custom CI/CD pipeline built from scratch using server-side Git hooks.
 
-This setup powers my personal blog, which can be viewed live at [http://wuweb.westeurope.cloudapp.azure.com/](http://wuweb.westeurope.cloudapp.azure.com/)
+This setup powers my personal blog, which can be viewed live at [https://wuweb.westeurope.cloudapp.azure.com/](https://wuweb.westeurope.cloudapp.azure.com/)
 The source code for the Hugo site itself is located at [My-Blog](https://github.com/wusshit/My-Blog.git) 
 
 ## Purpose
