@@ -23,7 +23,7 @@ The goal here is to document and share the DevOps practices implemented for this
     *   Hugo builds the static site (`public/` directory).
     *   The live webroot for Nginx is cleared.
     *   The newly built `public/` directory contents are copied to the Nginx webroot.
-5.  **Site Live:** Nginx serves the updated website, accessible via the Azure DNS name.
+5.  **Site Live:** Nginx serves the updated website, accessible securely via the Azure DNS name over HTTPS.
 
 ## Repository Structure
 
@@ -37,12 +37,10 @@ This repository is organized as follows:
     *   `01_vps_bare_git_repo_setup.md`: Setting up the server-side bare Git repository for deployment.
     *   `02_post-receive_hook.sh`: The core deployment automation script (the `post-receive` hook).
 *   **/nginx_configuration/**: Nginx configuration files.
-    *   `my_blog_nginx.conf`: The Nginx server block configuration for the Hugo site.
+    *   `my_blog_nginx.conf`: my_blog_nginx.conf: The Nginx server block configuration for the Hugo site, including SSL/TLS (HTTPS) settings.
 
 ## Future Enhancements for This Setup
 
-*   Add more functionalities provided by Nginx
-*   Implement HTTPS
 *   Automate server provisioning and configuration using Ansible.
 *   Explore containerizing the application/build process with Docker.
 *   Set up monitoring and more robust logging.
